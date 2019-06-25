@@ -1,6 +1,9 @@
+import time
+import threadpool
+from bs4 import BeautifulSoup
+import lxml
+
 def parseHtml(pageSource):
-    from bs4 import BeautifulSoup
-    import lxml
     return BeautifulSoup(pageSource, 'lxml')
 
 def get_img_tags(pageSource):
@@ -23,21 +26,19 @@ def download_file(url):
         print ('Network conditions is not good.')
 
 class createMultiThread:
-    def __init__(self, threadNum, threadReqFunc, threadReqList, creating, done):
-        import threadpool
-        import time
+    def __init__(self, threadNum, threadReqFunc, threadReqList, threadCreating, threadDone):
         self.pool = threadpool.ThreadPool(threadNum)
         self.requests = threadpool.makeRequests(threadReqFunc, threadReqList)
-        self.creating = creating
-        self.done = done
+        self.threadCreating = threadCreating
+        self.threadDone = threadDone
         self.start_time = time.time()
     
     def start(self):
         for req in self.requests:
-            self.creating(req)
+            self.threadCreating(req)
             self.pool.putRequest(req)
 
         self.pool.wait()
         consume_time = '%d second'% (time.time() - self.start_time)
-        self.done(consume_time)
+        self.threadDone(consume_time)
     

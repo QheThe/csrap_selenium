@@ -33,6 +33,12 @@ def bilibili():
                 urllib.request.urlretrieve(fileUrl, fileName)
             except:
                 print ('Network conditions is not good.')
+    
+    def multiThreadCreating(req):
+        print(req)
+
+    def multiThreadDone(time):
+        print(time)
 
     # 获取页面实例
     page = action.getPage('https://www.bilibili.com/')
@@ -45,18 +51,13 @@ def bilibili():
     # 获取 img tags
     imgTags = tools.get_img_tags(pageSource)
     # 下载 img tags
-    startTime = time.time()
-    # 实例化线程池
-    pool = threadpool.ThreadPool(5)
-    requests = threadpool.makeRequests(download_img, imgTags)
-
-    for req in requests:
-        print('线程请求', req)
-        pool.putRequest(req)
-
-    pool.wait()
-
-    print ('%d second' % (time.time() - startTime)) 
+    multiThread = tools.createMultiThread(
+        threadNum=5,
+        threadReqFunc=download_img,
+        threadReqList=imgTags,
+        threadCreating=multiThreadCreating,
+        threadDone=multiThreadDone)
+    multiThread.start()
 
 bilibili()
 
