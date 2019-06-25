@@ -25,11 +25,15 @@ def getPage (url):
 
 def getPageSource(url):
     page = getPage(url)
-    # 对付懒加载
-    js="window.scrollTo(0,document.body.scrollHeight)"
-    driver.execute_script(js)
-    time.sleep(3)
-    return page.page_source
+    load_script('./js_script.js', page)
+    time.sleep(10)
+    pageSource = page.page_source
+    page.quit()
+    return pageSource 
+
+def load_script(script_path, driver):
+    fp = open(script_path, "r")
+    driver.execute_script(fp.read())
 
 def get_pic(url):
     rawPageSource = getPageSource(url)
