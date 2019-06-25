@@ -48,7 +48,7 @@ def bilibili():
     startTime = time.time()
     # 实例化线程池
     pool = threadpool.ThreadPool(5)
-    requests = threadpool.makeRequests(download_img(img), imgTags)
+    requests = threadpool.makeRequests(download_img, imgTags)
 
     for req in requests:
         print('线程请求', req)
