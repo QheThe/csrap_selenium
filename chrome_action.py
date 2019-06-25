@@ -10,6 +10,8 @@ import lxml
 driver_options = Options()
 driver_options.add_argument('--headless')
 driver_options.add_argument('--disable-gpu')
+ua = 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_0_1 like Mac OS X) AppleWebKit/602.1.50 (KHTML, like Gecko) Mobile/14A403 MicroMessenger/6.3.27 NetType/WIFI Language/zh_CN'
+driver_options.add_argument('user-agent=' + ua)
 
 def waitForElLoadByTagName (tagName, wait, browser):
     waiter = WebDriverWait(driver=browser, timeout=wait, poll_frequency=0.5)

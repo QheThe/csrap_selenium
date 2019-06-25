@@ -39,7 +39,7 @@ def bilibili():
         if alt:
             url = url.split('.')
             #  去除尺寸参数
-            # url.pop(len(url) - 2)
+            url.pop(len(url) - 2)
             # 提取文件扩展名
             fileExt = url[len(url) - 1]
             fileName = './img/' + str(alt) + '.' + fileExt
