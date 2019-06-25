@@ -12,4 +12,4 @@ function scrollToBottom (scrollSection) {
     }, 1000)
 }
 
-scrollToBottom(20)
+scrollToBottom(10)

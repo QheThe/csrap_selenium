@@ -4,26 +4,7 @@ import chrome_action as action
 import urllib
 import socket
 import os
-
-# 多线程版本 
-# nameList = ['mocha', 'quartz', 'asd']
-# startTime = time.time()
-
-# def sayHello (str):
-#     # print ("hello", str)
-#     time.sleep(2)
-
-# # 实例化线程池
-# pool = threadpool.ThreadPool(5)
-# requests = threadpool.makeRequests(sayHello, nameList)
-
-# for req in requests:
-#     print('线程请求', req)
-#     pool.putRequest(req)
-
-# pool.wait()
-
-# print ('%d second' % (time.time() - startTime)) 
+import tools
 
 def bilibili():
 
@@ -58,13 +39,38 @@ def bilibili():
     # 加载自定义 js 脚本
     action.load_script ('./js_script.js', page)
     # 等待 js 执行 完成
-    time.sleep(20)
+    time.sleep(10)
     # 获取页面源码
     pageSource = action.getPageSource(page)
     # 获取 img tags
-    imgTags = action.get_img_tags(pageSource)
-    # 下载 img tags 
-    for img in imgTags:
-        download_img(img)
+    imgTags = tools.get_img_tags(pageSource)
+    # 下载 img tags
+    startTime = time.time()
+    # 实例化线程池
+    pool = threadpool.ThreadPool(5)
+    requests = threadpool.makeRequests(download_img(img), imgTags)
+
+    for req in requests:
+        print('线程请求', req)
+        pool.putRequest(req)
+
+    pool.wait()
+
+    print ('%d second' % (time.time() - startTime)) 
 
 bilibili()
+
+# def cosplayjavpl(url):
+#     # 获取页面实例
+#     page = action.getPage(url)
+#     # 等待浏览器检查
+#     time.sleep(10)
+#     # 加载自定义 js 脚本
+#     action.load_script ('./js_script.js', page)
+#     # 等待 js 执行 完成
+#     time.sleep(10)
+#     # 获取页面源码
+#     pageSource = action.getPageSource(page)
+    
+
+# cosplayjavpl('http://cosplayjav.pl')
