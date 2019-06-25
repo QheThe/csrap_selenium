@@ -1,6 +1,9 @@
 import time
 import threadpool
 import chrome_action as action
+import urllib
+import socket
+import os
 
 # 多线程版本 
 # nameList = ['mocha', 'quartz', 'asd']
@@ -21,7 +24,15 @@ import chrome_action as action
 # pool.wait()
 
 # print ('%d second' % (time.time() - startTime)) 
+
 def bilibili():
+
+    def formatUrl(url):
+        if url.find('//'):
+            return url
+        else:
+            return "https:" + url
+
     # 获取页面实例
     page = action.getPage('https://www.bilibili.com/')
     # 加载自定义 js 脚本
@@ -32,12 +43,28 @@ def bilibili():
     pageSource = action.getPageSource(page)
     # 获取 img tags
     imgTags = action.get_img_tags(pageSource)
-    # 输出 img tags 
-    for i in range(len(imgTags)):
-        print(imgTags[i].get('src'))
-        print(imgTags[i].get('alt'))
+    # 下载 img tags 
+    for img in imgTags:
+        url = formatUrl(img.get('src'))
+        alt = img.get('alt')
+        if alt:
+            url = url.split('.')
+            #  去除尺寸参数
+            # url.pop(len(url) - 2)
+            # 提取文件扩展名
+            fileExt = url[len(url) - 1]
+            fileName = './img/' + str(alt) + '.' + fileExt
+            fileUrl = '.'.join(url)
 
-# bilibili()
+            # 下载文件
+            try:
+                print(fileUrl)
+                print(fileName)
+                urllib.request.urlretrieve(fileUrl, fileName)
+            except:
+                print ('Network conditions is not good.')
+
+bilibili()
 
 
 def cosplayjavpl():
@@ -58,4 +85,4 @@ def cosplayjavpl():
         print(imgTags[i].get('src'))
         print(imgTags[i].get('alt'))
 
-cosplayjavpl()
+# cosplayjavpl()
