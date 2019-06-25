@@ -23,10 +23,7 @@ def getPage (url):
     # 将页面实例返回
     return driver
 
-def getPageSource(url):
-    page = getPage(url)
-    load_script('./js_script.js', page)
-    time.sleep(10)
+def getPageSource(page):
     pageSource = page.page_source
     page.quit()
     return pageSource 
@@ -35,9 +32,7 @@ def load_script(script_path, driver):
     fp = open(script_path, "r")
     driver.execute_script(fp.read())
 
-def get_pic(url):
-    rawPageSource = getPageSource(url)
-
-    parsedHtml = BeautifulSoup(rawPageSource, 'lxml')
+def get_img_tags(pageSource):
+    parsedHtml = BeautifulSoup(pageSource, 'lxml')
     imgTags = parsedHtml.find_all('img')
     return imgTags
