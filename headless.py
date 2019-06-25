@@ -32,11 +32,30 @@ def bilibili():
     pageSource = action.getPageSource(page)
     # 获取 img tags
     imgTags = action.get_img_tags(pageSource)
-    print (imgTags) 
+    # 输出 img tags 
+    for i in range(len(imgTags)):
+        print(imgTags[i].get('src'))
+        print(imgTags[i].get('alt'))
 
-bilibili()
+# bilibili()
 
-# imgTags = action.get_pic('https://www.bilibili.com/')
-# for i in range(len(imgTags)):
-#     print(imgTags[i].get('src'))
-#     print(imgTags[i].get('alt'))
+
+def cosplayjavpl():
+    # 获取页面实例
+    page = action.getPage('http://cosplayjav.pl')
+    # 等待 8 秒浏览器检查
+    time.sleep(8)
+    # 加载自定义 js 脚本
+    action.load_script ('./js_script.js', page)
+    # 等待 js 执行 完成
+    time.sleep(20)
+    # 获取页面源码
+    pageSource = action.getPageSource(page)
+    # 获取 img tags
+    imgTags = action.get_img_tags(pageSource)
+    # 输出 img tags 
+    for i in range(len(imgTags)):
+        print(imgTags[i].get('src'))
+        print(imgTags[i].get('alt'))
+
+cosplayjavpl()

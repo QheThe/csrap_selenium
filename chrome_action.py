@@ -8,8 +8,8 @@ from bs4 import BeautifulSoup
 import lxml
 
 driver_options = Options()
-# driver_options.add_argument('--headless')
-# driver_options.add_argument('--disable-gpu')
+driver_options.add_argument('--headless')
+driver_options.add_argument('--disable-gpu')
 
 def waitForElLoadByTagName (tagName, wait, browser):
     waiter = WebDriverWait(driver=browser, timeout=wait, poll_frequency=0.5)

@@ -3,8 +3,8 @@ function scrollToBottom (scrollSection) {
     var realScrollSection = 0
     var scrollCount = 0
     var timer = setInterval(function() {
-        console.log('scrollCount',scrollCount)
-        console.log('realScrollSection', realScrollSection)
+        console.log(scrollCount)
+        console.log(realScrollSection)
         realScrollSection += eachScrollSection
         window.scrollTo(0,realScrollSection)
         scrollCount++
