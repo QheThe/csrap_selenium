@@ -19,7 +19,8 @@ def bilibili():
             tools.download_file(url=url, fileName='./img/' + str(alt))
     
     def multiThreadCreating(req):
-        print(req)
+        # print(req)
+        print()
 
     def multiThreadDone(time):
         print(time)
@@ -36,7 +37,7 @@ def bilibili():
     imgTags = tools.get_img_tags(pageSource)
     # 下载 img tags
     multiThread = tools.createMultiThread(
-        threadNum=2,
+        threadNum=4,
         threadReqFunc=download_img,
         threadReqList=imgTags,
         threadCreating=multiThreadCreating,

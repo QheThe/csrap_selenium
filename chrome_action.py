@@ -5,8 +5,8 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 
 driver_options = Options()
-# driver_options.add_argument('--headless')
-# driver_options.add_argument('--disable-gpu')
+driver_options.add_argument('--headless')
+driver_options.add_argument('--disable-gpu')
 # ua = 'Mozilla/5.0 (Linux; Android 5.0; SM-G900P Build/LRX21T) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Mobile Safari/537.36'
 # # driver_options.add_argument('user-agent=' + ua)
 
