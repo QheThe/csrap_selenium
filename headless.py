@@ -1,13 +1,8 @@
-import time
-import threadpool
 import chrome_action as action
-import urllib
-import socket
-import os
 import tools
+import time
 
 def bilibili():
-
     def formatUrl(url):
         if url.find('//'):
             return url
@@ -21,18 +16,7 @@ def bilibili():
             url = url.split('.')
             #  去除尺寸参数
             url.pop(len(url) - 2)
-            # 提取文件扩展名
-            fileExt = url[len(url) - 1]
-            fileName = './img/' + str(alt) + '.' + fileExt
-            fileUrl = '.'.join(url)
-
-            # 下载文件
-            try:
-                print(fileUrl)
-                print(fileName)
-                urllib.request.urlretrieve(fileUrl, fileName)
-            except:
-                print ('Network conditions is not good.')
+            tools.download_file(url=url, fileName='./img/' + str(alt))
     
     def multiThreadCreating(req):
         print(req)
@@ -52,7 +36,7 @@ def bilibili():
     imgTags = tools.get_img_tags(pageSource)
     # 下载 img tags
     multiThread = tools.createMultiThread(
-        threadNum=5,
+        threadNum=2,
         threadReqFunc=download_img,
         threadReqList=imgTags,
         threadCreating=multiThreadCreating,

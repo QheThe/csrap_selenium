@@ -2,6 +2,7 @@ import time
 import threadpool
 from bs4 import BeautifulSoup
 import lxml
+import urllib
 
 def parseHtml(pageSource):
     return BeautifulSoup(pageSource, 'lxml')
@@ -11,11 +12,10 @@ def get_img_tags(pageSource):
     imgTags = parsedHtml.find_all('img')
     return imgTags
 
-def download_file(url):
-    import urllib
+def download_file(url, fileName):
     # 提取文件扩展名
     fileExt = url[len(url) - 1]
-    fileName = './img/' + str(alt) + '.' + fileExt
+    fileName = fileName + '.' + fileExt
     fileUrl = '.'.join(url)
     # 下载文件
     try:
