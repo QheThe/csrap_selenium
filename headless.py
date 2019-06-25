@@ -33,18 +33,7 @@ def bilibili():
         else:
             return "https:" + url
 
-    # 获取页面实例
-    page = action.getPage('https://www.bilibili.com/')
-    # 加载自定义 js 脚本
-    action.load_script ('./js_script.js', page)
-    # 等待 js 执行 完成
-    time.sleep(20)
-    # 获取页面源码
-    pageSource = action.getPageSource(page)
-    # 获取 img tags
-    imgTags = action.get_img_tags(pageSource)
-    # 下载 img tags 
-    for img in imgTags:
+    def download_img (img):
         url = formatUrl(img.get('src'))
         alt = img.get('alt')
         if alt:
@@ -64,14 +53,8 @@ def bilibili():
             except:
                 print ('Network conditions is not good.')
 
-bilibili()
-
-
-def cosplayjavpl():
     # 获取页面实例
-    page = action.getPage('http://cosplayjav.pl')
-    # 等待 8 秒浏览器检查
-    time.sleep(8)
+    page = action.getPage('https://www.bilibili.com/')
     # 加载自定义 js 脚本
     action.load_script ('./js_script.js', page)
     # 等待 js 执行 完成
@@ -80,9 +63,8 @@ def cosplayjavpl():
     pageSource = action.getPageSource(page)
     # 获取 img tags
     imgTags = action.get_img_tags(pageSource)
-    # 输出 img tags 
-    for i in range(len(imgTags)):
-        print(imgTags[i].get('src'))
-        print(imgTags[i].get('alt'))
+    # 下载 img tags 
+    for img in imgTags:
+        download_img(img)
 
-# cosplayjavpl()
+bilibili()
