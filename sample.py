@@ -21,18 +21,17 @@ class page:
                 print('cookie 恢复')
                 print(cookie)
                 driver.add_cookie(cookie)
-        else:
-            driver.get(url)
-            raw_cookies = driver.get_cookies()
-            time.sleep(cookie_cache_wait)
-            for cookie in raw_cookies:
-                self.cookies.append({
-                    'name': cookie['name'],
-                    'value': cookie['value']
-                })
-            for cookie in self.cookies:
-                print('缓存 cookie')
-                print(cookie)
+        driver.get(url)
+        raw_cookies = driver.get_cookies()
+        time.sleep(cookie_cache_wait)
+        for cookie in raw_cookies:
+            self.cookies.append({
+                'name': cookie['name'],
+                'value': cookie['value']
+            })
+        for cookie in self.cookies:
+            print('缓存 cookie')
+            print(cookie)
         return driver
 
 bilibili = page(driver_options=driverOptions)
