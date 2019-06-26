@@ -34,11 +34,17 @@ class page:
             print(cookie)
         return driver
 
-bilibili = page(driver_options=driverOptions)
-b1 = bilibili.open(url='https://www.bilibili.com', cookie_cache_wait=20)
-b1.quit()
+# bilibili = page(driver_options=driverOptions)
+# b1 = bilibili.open(url='https://www.bilibili.com', cookie_cache_wait=20)
+# b1.quit()
 
-time.sleep(2)
+# time.sleep(2)
 
-b2 = bilibili.open(url='https://www.bilibili.com', cookie_cache_wait=50)
-b2.quit()
+# b2 = bilibili.open(url='https://www.bilibili.com', cookie_cache_wait=50)
+# b2.quit()
+
+cosplayjav = page(driver_options=driverOptions) 
+c1 = cosplayjav.open(url='http://cosplayjav.pl', cookie_cache_wait=10)
+c1.quit()
+c2 = cosplayjav.open(url='http://cosplayjav.pl', cookie_cache_wait=20)
+c2.quit()
